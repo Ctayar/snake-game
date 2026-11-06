@@ -64,13 +64,15 @@
         // BUILD THE GAME FROM HERE
         // ===================================
         //
-        snake[0].x += direction.x;
-        snake[0].y += direction.y;
+        
         // Use your custom agent in VS Code Chat 
         // to guide your work through each step. 
         // Commit regularly.
         //
         // Step 1: Movement (game loop)
+        snake[0].x += direction.x;
+        snake[0].y += direction.y;
+        drawGame();
         // Step 2: Keyboard controls (arrow keys)
         // Step 3: Eating and growing
         // Step 4: Game over
