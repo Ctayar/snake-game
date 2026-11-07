@@ -71,16 +71,17 @@
         
         // Step 1: Movement (game loop)
         const gameLoop = () => {
-            const previousX = snake[0].x;
-            const previousY = snake[0].y;
+            for (let i = snake.length - 1; i > 0; i--) {
+                snake[i].x = snake[i - 1].x;
+                snake[i].y = snake[i - 1].y;
+
+            }
+        
             snake[0].x += direction.x;
             snake[0].y += direction.y;
-            const nextX = snake[1].x;
-            const nextY = snake[1].y;
-            snake[1].x = previousX;
-            snake[1].y = previousY;
-            snake[2].x = nextX;
-            snake[2].y = nextY;
+            if (snake[0].x === food.x && snake[0].y === food.y){
+
+            }
             drawGame();
         };
         setInterval(gameLoop, 200);
@@ -95,11 +96,9 @@
             } else if (event.key === "ArrowRight" && direction.x === 0) {
                 direction = { x: 1, y: 0 };
             }
-        })
-
-
-
+        });
         // Step 3: Eating and growing
+        
         // Step 4: Game over
         // Step 5: Improvements
         //
