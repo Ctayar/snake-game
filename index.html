@@ -34,6 +34,17 @@
         ];
         let direction = { x: 1, y: 0 };
         let food = { x: 15, y: 15 };
+        const obstacles = [
+        // Top-left "L" shape
+        {x: 2, y: 2}, {x: 3, y: 2}, {x: 2, y: 3},
+    
+        // Top-right "L" shape 
+        {x: 17, y: 2}, {x: 16, y: 2}, {x: 17, y: 3},
+    
+        // Bottom-left "L" shape
+        {x: 2, y: 17}, {x: 3, y: 17}, {x: 2, y: 16}
+        ];
+
         let score = 0;
         let snakeColor = "red";
         const availableColors = ["red", "blue", "purple", 
@@ -54,7 +65,14 @@
                 food.y * gridSize,
                 gridSize, gridSize
             );
-
+            ctx.fillStyle = "silver";
+            for (const obstacle of obstacles) {
+                ctx.fillRect(
+                    obstacle.x * gridSize,
+                    obstacle.y * gridSize,
+                    gridSize, gridSize
+                );
+            }
             ctx.fillStyle = snakeColor;
             for (const segment of snake) {
                 ctx.fillRect(
