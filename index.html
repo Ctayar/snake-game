@@ -35,6 +35,7 @@
         let direction = { x: 1, y: 0 };
         let food = { x: 15, y: 15 };
         let score = 0;
+        const info = document.getElementById("info");
         let gameLoopInterval;
 
         // ===== DRAWING =====
@@ -81,6 +82,7 @@
             snake[0].x += direction.x;
             snake[0].y += direction.y;
             for (let i = 1; i < snake.length; i++) { 
+                // Step 4: Game ove
                 if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
                     clearInterval(gameLoopInterval);
                     alert("Game Over! Your score: " + score);
@@ -89,8 +91,10 @@
                 }
 
             }
-
+            // Step 3: Eating and growing
             if (snake[0].x === food.x && snake[0].y === food.y){
+                score++;
+                info.textContent = "Score: " + score;
                 snake.push({ x: tailX, y: tailY });
                 food.x = Math.floor(Math.random() * tileCount);
                 food.y = Math.floor(Math.random() * tileCount);
@@ -110,9 +114,9 @@
                 direction = { x: 1, y: 0 };
             }
         });
-        // Step 3: Eating and growing
         
-        // Step 4: Game over
+        
+        
         // Step 5: Improvements
         //
         // ===================================
