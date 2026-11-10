@@ -49,7 +49,7 @@
         let snakeColor = "red";
         const availableColors = ["red", "blue", "purple", 
         "yellow", "orange", "green", "pink", 
-        "black", "white", "teal", "cyan", "gold"];
+        "black", "teal", "cyan", "gold"];
         const info = document.getElementById("info");
         info.textContent = "Score: " + score;
         let gameLoopInterval;
@@ -108,12 +108,14 @@
                 if (snake[0].x === obstacle.x && snake[0].y === obstacle.y) {
                     clearInterval(gameLoopInterval);
                     alert("Game Over! You Hit An Obstacle! Your score is: " + score);
+                    location.reload(); // Reload the page to restart the game
                 return;
                 }
             }
             if (snake[0].x <0 || snake[0].x > tileCount - 1 || snake[0].y < 0 || snake[0].y > tileCount - 1) {
                 clearInterval(gameLoopInterval);
                 alert("Game Over! You Hit A Wall! Your score is: " + score);
+                location.reload(); // Reload the page to restart the game
                 return;
             }
             for (let i = 1; i < snake.length; i++) { 
@@ -121,6 +123,7 @@
                 if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
                     clearInterval(gameLoopInterval);
                     alert("Game Over! You Ate Yourself! Your score: " + score);
+                    location.reload(); // Reload the page to restart the game
                     return;
 
                 }
@@ -134,6 +137,13 @@
                 snake.push({ x: tailX, y: tailY });
                 food.x = Math.floor(Math.random() * tileCount);
                 food.y = Math.floor(Math.random() * tileCount);
+                // Ensure food does not spawn on the snake or obstacles
+                while (snake.some(segment => segment.x === food.x && segment.y === food.y)
+                    || obstacles.some(obstacles => obstacles.x === food.x && 
+                obstacles.y === food.y)) {
+                    food.x = Math.floor(Math.random() * tileCount);
+                    food.y = Math.floor(Math.random() * tileCount);
+                }
             }
             drawGame();
         };
